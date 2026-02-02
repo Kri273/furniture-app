@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { Pressable } from "react-native";
+import  Button  from "../components/Button";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -25,11 +26,8 @@ export default function HomeScreen() {
           <ThemedText type="title">Here!</ThemedText>
         </ThemedView>
 
-        <Pressable style={styles.button} onPress={() => router.push("/signup")}>
-          <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-            Sign Up
-          </ThemedText>
-        </Pressable>
+        <Button title="Sign Up" onPress={() => router.push("/signup")} style={styles.button} />
+
         <Pressable style={styles.signin} onPress={() => router.push("/signin")}>
           <ThemedText type="defaultSemiBold" style={styles.signinText}>
             Sign In
@@ -46,20 +44,6 @@ const styles = StyleSheet.create({
     height: 209,
     marginTop: 48,
   },
-  button: {
-    width: 303,
-    height: 60,
-    marginTop: 32,
-    backgroundColor: "#4F63AC",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    textAlign: "center",
-  },
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
@@ -72,6 +56,11 @@ const styles = StyleSheet.create({
   titleOrangeContainer: {
     color: "#FCA34D",
     textDecorationLine: "underline",
+  },
+  button: {
+    marginTop: 32,
+    width: 303,
+    height: 60,
   },
   signin: {
     width: 303,

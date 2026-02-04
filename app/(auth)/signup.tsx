@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import AuthHeader from "../../components/AuthHeader";
-import Input from "../../components/Input";
 import { router } from "expo-router";
+import React, { useState } from "react";
+import { Text, View } from "react-native";
+import AuthFooter from "../../components/AuthFooter";
+import AuthHeader from "../../components/AuthHeader";
 import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
+import Input from "../../components/Input";
 import Separator from "../../components/Separator";
-import AuthFooter from "../../components/AuthFooter";
 import { styles } from "./signup.styles";
-
 
 export default function SignupScreen() {
   const [name, setName] = useState("");
@@ -16,13 +15,22 @@ export default function SignupScreen() {
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
 
-
   return (
     <View style={styles.container}>
       <AuthHeader title="Sign Up" onBackPress={() => router.back()} />
 
-      <Input label="Name" placeholder="John Doe" value={name} onChangeText={setName} />
-      <Input label="Email" placeholder="example@mail.com" value={email} onChangeText={setEmail} />
+      <Input
+        label="Name"
+        placeholder="John Doe"
+        value={name}
+        onChangeText={setName}
+      />
+      <Input
+        label="E-mail"
+        placeholder="example@mail.com"
+        value={email}
+        onChangeText={setEmail}
+      />
       <Input
         label="Password"
         placeholder="••••••••••"
@@ -34,19 +42,43 @@ export default function SignupScreen() {
       <Checkbox
         checked={agree}
         onChange={setAgree}
-        label="I agree with Terms & Conditions"
+        label={
+          <Text
+            style={{
+              fontSize: 13,
+              color: "#4F63AC",
+              fontFamily: "Montserrat-Medium",
+            }}
+          >
+            I agree with{" "}
+            <Text style={{ fontFamily: "Montserrat-Bold" }}>Terms</Text> &{" "}
+            <Text style={{ fontFamily: "Montserrat-Bold" }}>Privacy</Text>
+          </Text>
+        }
       />
 
-
-
-
       <Button title="Sign Up" onPress={() => {}} />
-    
-<Separator text="Or sign up with" />
 
-<AuthFooter></AuthFooter>
+      <Separator text="Or sign up with" />
 
+      <Button
+              title=""
+              onPress={() => {}}
+              icon={require("../../assets/images/icons/google.png")}
+              iconStyle={{ width: 28, height: 28, marginRight: 0 }}
+              style={{
+                backgroundColor: "#3F4A59",
+                marginTop: 12,
+                width: "40%",
+                height: 60,
+                borderRadius: 14,
+                alignSelf: "center",
+                marginBottom: 54,
+              }}
+            />
+      
+
+      <AuthFooter type="signup" />
     </View>
   );
 }
-

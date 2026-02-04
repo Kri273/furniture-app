@@ -1,11 +1,11 @@
 import React from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, View } from "react-native";
 import { styles } from "./styles";
 
 type Props = {
   checked: boolean;
   onChange: (next: boolean) => void;
-  label?: string;
+  label?: React.ReactNode;
 };
 
 export default function Checkbox({ checked, onChange, label }: Props) {
@@ -26,7 +26,7 @@ export default function Checkbox({ checked, onChange, label }: Props) {
         ) : null}
       </View>
 
-      {label ? <Text style={styles.label}>{label}</Text> : null}
+      {label ? <View style={{ marginLeft: 10 }}>{label}</View> : null}
     </Pressable>
   );
 }

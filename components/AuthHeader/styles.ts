@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 8,
+    marginTop: 50,
+    marginBottom: 38,
   },
   backButton: {
     padding: 8,

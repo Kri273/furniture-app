@@ -9,6 +9,18 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
+    height: 60,
+  },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 8,
+    resizeMode: "contain",
   },
   title: {
     fontSize: 16,

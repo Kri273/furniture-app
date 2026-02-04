@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: Colors.grey,
-    borderRadius: 10,
+    borderRadius: 14,
+    height: 60,
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: Colors.text,
-    paddingVertical: 0, // Android: hoiab kõrguse kontrolli all
+    paddingVertical: 0,
   },
   eyeButton: {
     paddingLeft: 10,

@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.grey,
     alignItems: "center",
     justifyContent: "center",
+    marginVertical: 12,
   },
   boxChecked: {
     backgroundColor: Colors.grey,
@@ -26,11 +27,5 @@ export const styles = StyleSheet.create({
     width: 12,
     height: 12,
     resizeMode: "contain",
-  },
-  label: {
-    marginLeft: 10,
-    fontSize: 13,
-    color: Colors.text,
-    fontWeight: "600",
   },
 });

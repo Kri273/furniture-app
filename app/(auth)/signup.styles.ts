@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "../../constants/Colors";
+import { Button } from "@react-navigation/elements";
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,6 +9,10 @@ export const styles = StyleSheet.create({
     paddingTop: 18,
     backgroundColor: "#FFFFFF",
   },
+  Button: {
+    marginTop: 24,
+  },
+
 
 
 });

@@ -5,6 +5,7 @@ import { styles } from "./styles";
 type Props = {
   title: string;
   onBackPress?: () => void;
+
 };
 
 export default function AuthHeader({ title, onBackPress }: Props) {

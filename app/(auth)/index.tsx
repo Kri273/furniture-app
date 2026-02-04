@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <ThemedView style={styles.ThemedView}>
         <Image
-          source={require("../assets/images/10050 1.png")}
+          source={require("../../assets/images/10050 1.png")}
           style={styles.image}
         />
 

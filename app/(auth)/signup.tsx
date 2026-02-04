@@ -1,6 +1,7 @@
+import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import AuthFooter from "../../components/AuthFooter";
 import AuthHeader from "../../components/AuthHeader";
 import Button from "../../components/Button";
@@ -10,10 +11,34 @@ import Separator from "../../components/Separator";
 import { styles } from "./signup.styles";
 
 export default function SignupScreen() {
+  const { signUp } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignUp = async () => {
+    if (!name || !email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    if (!agree) {
+      Alert.alert("Error", "Please agree to Terms & Privacy");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await signUp(name, email, password);
+      // Navigeerimine toimub AuthContext's
+    } catch (error) {
+      Alert.alert("Error", "Sign up failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -57,26 +82,29 @@ export default function SignupScreen() {
         }
       />
 
-      <Button title="Sign Up" onPress={() => {}} />
+      <Button
+        title={loading ? "Signing up..." : "Sign Up"}
+        onPress={handleSignUp}
+        disabled={loading}
+      />
 
       <Separator text="Or sign up with" />
 
       <Button
-              title=""
-              onPress={() => {}}
-              icon={require("../../assets/images/icons/google.png")}
-              iconStyle={{ width: 28, height: 28, marginRight: 0 }}
-              style={{
-                backgroundColor: "#3F4A59",
-                marginTop: 12,
-                width: "40%",
-                height: 60,
-                borderRadius: 14,
-                alignSelf: "center",
-                marginBottom: 54,
-              }}
-            />
-      
+        title=""
+        onPress={() => {}}
+        icon={require("../../assets/images/icons/google.png")}
+        iconStyle={{ width: 28, height: 28, marginRight: 0 }}
+        style={{
+          backgroundColor: "#3F4A59",
+          marginTop: 12,
+          width: "40%",
+          height: 60,
+          borderRadius: 14,
+          alignSelf: "center",
+          marginBottom: 54,
+        }}
+      />
 
       <AuthFooter type="signup" />
     </View>

@@ -1,13 +1,41 @@
-import { ThemedView } from "@/components/ThemedView";
 import { useAuth } from "@/context/AuthContext";
-import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import React, { useMemo, useState } from "react";
+import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import TabHeader from "../../components/TabHeader";
-import CategoryIcon from "../../components/CategoryIcon";
+import { CategoryBox } from "../../components/CategoryBox";
 import ProductCard from "../../components/ProductCard";
+import TabHeader from "../../components/TabHeader";
+import { Colors } from "../../constants/Colors";
+import { categories } from "../../data/categories";
+import { products } from "../../data/products";
 
 export default function HomeScreen() {
   const { user } = useAuth();
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null,
+  );
+
+  const filteredProducts = useMemo(() => {
+    if (!selectedCategoryId) return products; // Popular / kõik
+    return products.filter((p) => p.category === selectedCategoryId);
+  }, [selectedCategoryId]);
+
+  const renderHeader = () => (
+    <FlatList
+      data={categories}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.listContent}
+      keyExtractor={(item, index) => String(item.id ?? `popular-${index}`)}
+      renderItem={({ item }) => (
+        <CategoryBox
+          item={item}
+          selected={(item.id ?? null) === selectedCategoryId}
+          onPress={() => setSelectedCategoryId(item.id ?? null)}
+        />
+      )}
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,64 +48,17 @@ export default function HomeScreen() {
         </Pressable>
         <TabHeader title="Find All You Need" />
       </View>
-      <ScrollView
-        horizontal
-        style={styles.scrollView}
-        showsHorizontalScrollIndicator={false}
-      >
-        <ThemedView style={styles.content}>
-          <CategoryIcon
-            icon={require("../../assets/images/icons/popular.png")}
-            label="Popular"
-          />
-          <CategoryIcon
-            icon={require("../../assets/images/icons/chair.png")}
-            label="Chair"
-          />
-          <CategoryIcon
-            icon={require("../../assets/images/icons/table.png")}
-            label="Table"
-          />
-          <CategoryIcon
-            icon={require("../../assets/images/icons/armchair.png")}
-            label="Armchair"
-          />
-          <CategoryIcon
-            icon={require("../../assets/images/icons/bed.png")}
-            label="Bed"
-          />
-          <CategoryIcon
-            icon={require("../../assets/images/icons/lamp.png")}
-            label="Lamp"
-          />
-        </ThemedView>
-      </ScrollView>
-      <View style={styles.content}>
-        <ProductCard
-          image={require("@/assets/images/lamp_image.png")}
-          title="Black Simple Lamp"
-          price={12.00}
-        />
-        <ProductCard
-          image={require("@/assets/images/table_image.png")}
-          title="Minimal Stand"
-          price={25.00}
-        />
-        <ProductCard
-          image={require("@/assets/images/chair_image.png")}
-          title="Coffee Chair"
-          price={20.00}
-        />
-        <ProductCard
-          image={require("@/assets/images/desk_image.png")}
-          title="Simple Desk"
-          price={50.00}
-        />
-      </View>
-
-
-
-
+      <FlatList
+        data={filteredProducts}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.content}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => <ProductCard item={item} />}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={<View style={{ height: 24 }} />}
+        showsVerticalScrollIndicator={false}
+      />
     </SafeAreaView>
   );
 }
@@ -85,13 +66,14 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: Colors.background,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 24,
     position: "relative",
+    backgroundColor: "#FFFFFF",
   },
   iconButton: {
     position: "absolute",
@@ -103,29 +85,18 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
-  scrollView: {
-    flex: 1,
+  listContent: {
+    paddingHorizontal: 24,
+    paddingTop: 8,
+    paddingBottom: 20,
+    gap: 16,
+  },
+  row: {
+    paddingHorizontal: 24,
+    justifyContent: "space-between",
   },
   content: {
-    padding: 24,
-    flexDirection: "row",
-    gap: 25,
-  },
-  categoryItem: {
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  categoryIcon: {
-    width: 44,
-    height: 44,
-    marginBottom: 8,
-  },
-  categoryText: {
-    fontSize: 14,
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: 16,
-    textAlign: "center",
+    paddingTop: 8,
+    backgroundColor: Colors.background,
   },
 });

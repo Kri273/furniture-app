@@ -8,6 +8,9 @@ export const Colors = {
   line: "#DADADA",
   danger: "#E5484D",
   white: "#FFFFFF",
+  mutedText: "#999999",
+  card: "#F5F5F5",
+
 
 } as const;
 

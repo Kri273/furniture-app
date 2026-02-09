@@ -11,7 +11,20 @@ type Props = {
 export default function AuthHeader({ title, icon }: Props) {
   return (
     <View style={styles.container}>
-      {icon && <View style={{ marginRight: 8 }}>{icon}</View>}
+      {icon && (
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            alignItems: "center",
+            justifyContent: "center",
+            width: 32,
+            height: 32,
+          }}
+        >
+          {icon}
+        </View>
+      )}
       <Text style={styles.title}>{title}</Text>
     </View>
   );

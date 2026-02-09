@@ -31,6 +31,9 @@ export default function RootLayout() {
     "DM-Sans-Bold": require("@/assets/images/fonts/DM_Sans/static/DMSans-Bold.ttf"),
     "DM-Sans-ExtraBold": require("@/assets/images/fonts/DM_Sans/static/DMSans-ExtraBold.ttf"),
     "DM-Sans-Black": require("@/assets/images/fonts/DM_Sans/static/DMSans-Black.ttf"),
+
+    // Gelasio 
+    "Gelasio-Medium": require("@/assets/images/fonts/Gelasio/static/Gelasio-Medium.ttf"),
   });
 
   useEffect(() => {

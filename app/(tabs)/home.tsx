@@ -1,4 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +12,7 @@ import { products } from "../../data/products";
 
 export default function HomeScreen() {
   const { user } = useAuth();
+  const router = useRouter();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null,
   );
@@ -40,13 +42,17 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Pressable style={styles.iconButton}>
-          <Image
-            source={require("../../assets/images/icons/search.png")}
-            style={styles.icon}
-          />
-        </Pressable>
-        <TabHeader title="Find All You Need" />
+        <TabHeader
+          title="Find All You Need"
+          icon={
+            <Pressable>
+              <Image
+                source={require("../../assets/images/icons/search.png")}
+                style={styles.icon}
+              />
+            </Pressable>
+          }
+        />
       </View>
       <FlatList
         data={filteredProducts}
@@ -54,7 +60,17 @@ export default function HomeScreen() {
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.content}
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <ProductCard item={item} />}
+        renderItem={({ item }) => (
+          <ProductCard
+            item={item}
+            onPress={() =>
+              router.push({
+                pathname: "/product",
+                params: { id: String(item.id) },
+              })
+            }
+          />
+        )}
         ListHeaderComponent={renderHeader}
         ListFooterComponent={<View style={{ height: 24 }} />}
         showsVerticalScrollIndicator={false}

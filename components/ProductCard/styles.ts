@@ -12,14 +12,17 @@ export const styles = StyleSheet.create({
     height: 200,
   },
   title: {
+    marginBottom: 5,
     fontSize: 14,
-    fontWeight: "600",
-    color: Colors.text,
+    fontWeight: "400",
+    color: Colors.darkGray,
+    fontFamily: "Nunito Sans",
   },
   price: {
-    marginTop: 4,
-    fontSize: 13,
-    color: Colors.mutedText,
-    fontWeight: "600",
+    marginBottom: 5,
+    fontSize: 14,
+    color: Colors.text,
+    fontFamily: "Nunito Sans",
+    fontWeight: "700",
   },
 });

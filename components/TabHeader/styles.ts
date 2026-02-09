@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 8,
-    marginTop: 50,
-    marginBottom: 38,
+    marginTop: 24,
+    marginBottom: 26,
   },
   title: {
     fontSize: 16,

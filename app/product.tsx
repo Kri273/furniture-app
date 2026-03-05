@@ -13,10 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import { Colors } from "../constants/Colors";
 import { products } from "../data/products";
+import { useFavorites } from "@/context/FavoritesContext";
 
 export default function ProductScreen() {
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const { id } = useLocalSearchParams<{ id?: string }>();
   const productId = id ? Number(id) : NaN;
@@ -29,9 +30,6 @@ export default function ProductScreen() {
     description: "No description available.",
   };
 
-  const handleToggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
 
   const handleContactSeller = () => {
     console.log("Contact seller");
@@ -44,19 +42,18 @@ export default function ProductScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header with back button */}
+
         <View style={styles.header}>
           <Pressable onPress={handleGoBack} style={styles.backButton}>
             <BackProducts style={styles.backIcon} />
           </Pressable>
         </View>
 
-        {/* Product Image */}
+        {/* Should add more images and the display lines */}
         <View style={styles.imageContainer}>
           <Image source={product.image} style={styles.productImage} />
         </View>
 
-        {/* Product Details */}
         <View style={styles.detailsContainer}>
           <View style={styles.titleRow}>
             <Text style={styles.productTitle}>{product.title}</Text>
@@ -68,15 +65,14 @@ export default function ProductScreen() {
             {product.description || "No description available."}
           </Text>
 
-          {/* Action Buttons */}
           <View style={styles.buttonContainer}>
             <Pressable
-              onPress={handleToggleFavorite}
+              onPress={() => toggleFavorite(product.id)}
               style={styles.favoriteButton}
             >
               <Image
                 source={
-                  isFavorite
+      isFavorite(product.id)
                     ? require("@/assets/images/icons/favorites-active.png")
                     : require("@/assets/images/icons/favorites.png")
                 }

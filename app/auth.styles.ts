@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../constants/Colors";
-import { Button } from "@react-navigation/elements";
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,6 +10,5 @@ export const styles = StyleSheet.create({
   Button: {
     marginTop: 24,
   },
-
 
 });

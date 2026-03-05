@@ -41,19 +41,19 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TabHeader
-          title="Find All You Need"
-          icon={
-            <Pressable>
-              <Image
-                source={require("../../assets/images/icons/search.png")}
-                style={styles.icon}
-              />
-            </Pressable>
-          }
+  <TabHeader
+    title="Find All You Need"
+    iconPosition="left"
+    icon={
+      <Pressable>
+        <Image
+          source={require("../../assets/images/icons/search.png")}
+          style={styles.icon}
         />
-      </View>
+      </Pressable>
+    }
+  />
+
       <FlatList
         data={filteredProducts}
         numColumns={2}
@@ -83,13 +83,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 24,
-    position: "relative",
-    backgroundColor: "#FFFFFF",
   },
   iconButton: {
     position: "absolute",

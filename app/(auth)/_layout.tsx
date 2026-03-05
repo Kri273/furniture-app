@@ -34,6 +34,11 @@ export default function RootLayout() {
 
     // Gelasio 
     "Gelasio-Medium": require("@/assets/images/fonts/Gelasio/static/Gelasio-Medium.ttf"),
+
+    // Nunito Sans
+    "Nunito-Sans": require("@/assets/images/fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf"),
+    "Nunito-Sans-Italic": require("@/assets/images/fonts/Nunito_Sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf")
+
   });
 
   useEffect(() => {

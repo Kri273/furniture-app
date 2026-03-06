@@ -1,13 +1,12 @@
 import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import AuthFooter from "../../components/AuthFooter";
 import AuthHeader from "../../components/AuthHeader";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Separator from "../../components/Separator";
-import { styles } from "../auth.styles";
 
 export default function SigninScreen() {
   const { signIn } = useAuth();
@@ -24,7 +23,6 @@ export default function SigninScreen() {
     try {
       setLoading(true);
       await signIn(email, password);
-      // Navigeerimine toimub AuthContext's
     } catch (error) {
       Alert.alert("Error", "Sign in failed. Please try again.");
     } finally {
@@ -78,3 +76,15 @@ export default function SigninScreen() {
     </View>
   );
 }
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 18,
+    backgroundColor: "#FFFFFF",
+  },
+  Button: {
+    marginTop: 24,
+  },
+});

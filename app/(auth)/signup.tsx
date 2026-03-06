@@ -1,14 +1,13 @@
 import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import AuthFooter from "../../components/AuthFooter";
 import AuthHeader from "../../components/AuthHeader";
 import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import Separator from "../../components/Separator";
-import { styles } from "../auth.styles";
 
 export default function SignupScreen() {
   const { signUp } = useAuth();
@@ -32,7 +31,6 @@ export default function SignupScreen() {
     try {
       setLoading(true);
       await signUp(name, email, password);
-      // Navigeerimine toimub AuthContext's
     } catch (error) {
       Alert.alert("Error", "Sign up failed. Please try again.");
     } finally {
@@ -110,3 +108,15 @@ export default function SignupScreen() {
     </View>
   );
 }
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 18,
+    backgroundColor: "#FFFFFF",
+  },
+  Button: {
+    marginTop: 24,
+  },
+});

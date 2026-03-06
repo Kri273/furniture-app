@@ -15,7 +15,12 @@ export const products: Product[] = [
     id: 1,
     title: "Black Simple Lamp",
     image: require("@/assets/images/products/black_simple_lamp.jpg"),
-    category: 6,
+    images: [
+      require("@/assets/images/products/black_simple_lamp.jpg"),
+      require("@/assets/images/products/minimal_stand.jpg"),
+      require("@/assets/images/products/simple_desk.jpg"),
+    ],
+    category: 5,
     price: 12.0,
     description:
       "Minimal and elegant black lamp perfect for any modern interior. Provides soft ambient lighting.",

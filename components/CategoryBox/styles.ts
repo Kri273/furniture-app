@@ -3,28 +3,28 @@ import { Colors } from "../../constants/Colors";
 
 export const styles = StyleSheet.create({
   container: {
-    width: 44,
+    width: 72,
     alignItems: "center",
-    paddingVertical: 10,
     borderRadius: 14,
-    marginRight: 12,
+    marginRight: 10,
   },
   selected: {
     backgroundColor: Colors.text,
     color: Colors.white,
   },
   imageContainer: {
-    width: 44,
-    height: 44,    
+    width: 56,
+    height: 56,
     borderRadius: 12,
     marginBottom: 8,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.card,
   },
-  
+
   image: {
-    margin: 20,
+    width: 28,
+    height: 28,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.mutedText,
     fontFamily: "Nunito Sans",
-    fontWeight: "400"
+    fontWeight: "400",
   },
   selectedTitle: {
     color: Colors.primary,

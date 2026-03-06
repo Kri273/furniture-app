@@ -1,23 +1,27 @@
 import BackProducts from "@/assets/images/back_products.svg";
+import { useFavorites } from "@/context/FavoritesContext";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import { Colors } from "../constants/Colors";
 import { products } from "../data/products";
-import { useFavorites } from "@/context/FavoritesContext";
 
 export default function ProductScreen() {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavorites();
+  const { width } = useWindowDimensions();
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { id } = useLocalSearchParams<{ id?: string }>();
   const productId = id ? Number(id) : NaN;
@@ -25,11 +29,20 @@ export default function ProductScreen() {
     id: 0,
     title: "Unknown Product",
     image: require("@/assets/images/chair_image.png"),
+    images: [require("@/assets/images/chair_image.png")],
     category: 0,
     price: 0,
     description: "No description available.",
   };
 
+  const productImages =
+    product.images && product.images.length > 0
+      ? product.images
+      : [product.image];
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [productId]);
 
   const handleContactSeller = () => {
     console.log("Contact seller");
@@ -42,7 +55,6 @@ export default function ProductScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-
         <View style={styles.header}>
           <Pressable onPress={handleGoBack} style={styles.backButton}>
             <BackProducts style={styles.backIcon} />
@@ -51,7 +63,41 @@ export default function ProductScreen() {
 
         {/* Should add more images and the display lines */}
         <View style={styles.imageContainer}>
-          <Image source={product.image} style={styles.productImage} />
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onMomentumScrollEnd={(e) => {
+              if (!width) return;
+              const nextIndex = Math.round(
+                e.nativeEvent.contentOffset.x / width,
+              );
+              setSelectedImageIndex(nextIndex);
+            }}
+            scrollEventThrottle={16}
+          >
+            {productImages.map((img, index) => (
+              <Image
+                key={String(index)}
+                source={img}
+                style={[styles.productImage, { width }]}
+              />
+            ))}
+          </ScrollView>
+
+          {productImages.length > 1 ? (
+            <View pointerEvents="none" style={styles.imageIndicators}>
+              {productImages.map((_, index) => (
+                <View
+                  key={String(index)}
+                  style={[
+                    styles.indicatorLine,
+                    index === selectedImageIndex && styles.indicatorLineActive,
+                  ]}
+                />
+              ))}
+            </View>
+          ) : null}
         </View>
 
         <View style={styles.detailsContainer}>
@@ -72,7 +118,7 @@ export default function ProductScreen() {
             >
               <Image
                 source={
-      isFavorite(product.id)
+                  isFavorite(product.id)
                     ? require("@/assets/images/icons/favorites-active.png")
                     : require("@/assets/images/icons/favorites.png")
                 }
@@ -80,7 +126,11 @@ export default function ProductScreen() {
               />
             </Pressable>
             <View style={{ flex: 1 }}>
-              <Button title="Contact Seller" onPress={handleContactSeller} style={styles.shadowStyle} />
+              <Button
+                title="Contact Seller"
+                onPress={handleContactSeller}
+                style={styles.shadowStyle}
+              />
             </View>
           </View>
         </View>
@@ -124,6 +174,24 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+  },
+  imageIndicators: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 60,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  indicatorLine: {
+    width: 20,
+    height: 3,
+    borderRadius: 2,
+    marginHorizontal: 4,
+    backgroundColor: Colors.secondaryButton,
+  },
+  indicatorLineActive: {
+    backgroundColor: Colors.text,
   },
   detailsContainer: {
     backgroundColor: Colors.background,
@@ -191,10 +259,10 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   shadowStyle: {
-  elevation: 6,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.2,
-  shadowRadius: 6,
-},
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+  },
 });

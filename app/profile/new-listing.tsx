@@ -110,7 +110,9 @@ export default function NewListingScreen() {
         {categoryOpen ? (
           <View style={styles.dropdown}>
             <ScrollView showsVerticalScrollIndicator={false}>
-              {categories.map((cat) => (
+              {categories
+                .filter((cat) => cat.title !== "Popular")
+                .map((cat) => (
                 <Pressable
                   key={cat.id ?? cat.title}
                   style={styles.dropdownItem}
@@ -121,7 +123,7 @@ export default function NewListingScreen() {
                 >
                   <Text style={styles.dropdownItemText}>{cat.title}</Text>
                 </Pressable>
-              ))}
+                ))}
             </ScrollView>
           </View>
         ) : null}

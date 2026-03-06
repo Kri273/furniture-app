@@ -10,5 +10,4 @@ export const styles = StyleSheet.create({
   Button: {
     marginTop: 24,
   },
-
 });

@@ -7,7 +7,7 @@ import AuthHeader from "../../components/AuthHeader";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Separator from "../../components/Separator";
-import { styles } from "./signup.styles";
+import { styles } from "../auth.styles";
 
 export default function SigninScreen() {
   const { signIn } = useAuth();
@@ -50,7 +50,11 @@ export default function SigninScreen() {
         secure
       />
 
-      <Button title={loading ? "Signing in..." : "Sign In"} onPress={handleSignIn} disabled={loading} />
+      <Button
+        title={loading ? "Signing in..." : "Sign In"}
+        onPress={handleSignIn}
+        disabled={loading}
+      />
 
       <Separator text="Or sign in with" />
 

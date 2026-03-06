@@ -8,11 +8,22 @@ type Props = {
   icon?: React.ReactNode;
 };
 
-export default function AuthHeader({ title, icon }: Props) {
+export default function AuthHeader({ title, icon, iconPosition = "left" }: Props & { iconPosition?: "left" | "right" }) {
   return (
     <View style={styles.container}>
-      {icon && <View style={{ marginRight: 8 }}>{icon}</View>}
-      <Text style={styles.title}>{title}</Text>
+      
+      <View style={styles.side}>
+        {icon && iconPosition === "left" ? icon : null}
+      </View>
+
+      <View style={styles.center}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+
+      <View style={styles.side}>
+        {icon && iconPosition === "right" ? icon : null}
+      </View>
+
     </View>
   );
 }

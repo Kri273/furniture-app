@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
 import Separator from "../../components/Separator";
-import { styles } from "./signup.styles";
+import { styles } from "../auth.styles";
 
 export default function SignupScreen() {
   const { signUp } = useAuth();

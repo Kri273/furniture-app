@@ -1,13 +1,24 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
 import { useAuth } from "@/context/AuthContext";
-import { Alert, Pressable, StyleSheet } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../../components/Button";
-import { Image } from "react-native";
+import TabHeader from "../../components/TabHeader";
+import ButtonProf from "../../components/ButtonProf";
+
+import { router, useRouter } from "expo-router";
+
+import arrow_r from "../../assets/images/icons/arrow-ri.png";
 
 export default function ProfileScreen() {
   const { user, signOut } = useAuth();
+  const router = useRouter();
+
+  const handleNewListing = () => {
+    router.push("/profile/new-listing");
+  };
 
   const handleSignOut = async () => {
     Alert.alert("Sign Out", "Are you sure you want to sign out?", [
@@ -30,40 +41,56 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ThemedView style={styles.content}>
-        <ThemedText type="title" style={styles.title}>
-          Profile
-        </ThemedText>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+      <TabHeader
+        title="Profile"
+        iconPosition="right"
+        icon={
+          <Pressable
+            onPress={handleSignOut}
+            accessibilityRole="button"
+            accessibilityLabel="Log out"
+          >
+            <Image source={require("../../assets/images/icons/Logout.png")} />
+          </Pressable>
+        }
+      />
+      <View style={styles.container}>
+        <View style={styles.topSection}>
+          {user && (
+            <ThemedView>
+              <ThemedText type="default" style={styles.name}>
+                {user.name}
+              </ThemedText>
+              <ThemedText type="default" style={styles.email}>
+                {user.email}
+              </ThemedText>
+              <View>
+                <ButtonProf
+                  title="My Listings"
+                  subTitle="Already have 10 listings"
+                  onPress={handleNewListing}
+                  icon={arrow_r}
+                />
+                <ButtonProf
+                  title="Settings"
+                  subTitle="Account, FAQ, Contact"
+                  onPress={() => router.push("/profile/settings")}
+                  icon={arrow_r}
+                />
+              </View>
+            </ThemedView>
+          )}
+        </View>
 
-        {user && (
-          <ThemedView style={styles.userInfo}>
-            <ThemedText type="default" style={styles.label}>
-              Name:
-            </ThemedText>
-            <ThemedText type="default" style={styles.value}>
-              {user.name}
-            </ThemedText>
-
-            <ThemedText type="default" style={styles.label}>
-              Email:
-            </ThemedText>
-            <ThemedText type="default" style={styles.value}>
-              {user.email}
-            </ThemedText>
-          </ThemedView>
-        )}
-
-
-        <Pressable
-                onPress={handleSignOut}
-                hitSlop={10}
-                accessibilityRole="button"
-                accessibilityLabel="Log out"
-              >
-                <Image source={require("../../assets/images/icons/Logout.png")}/>
-              </Pressable>
-      </ThemedView>
+        <View>
+          <Button
+            title="Add a new listing"
+            onPress={handleNewListing}
+            style={{ margin: 18 }}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -71,29 +98,24 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
-  },
-  content: {
-    flex: 1,
-    padding: 24,
-  },
-  title: {
-    marginBottom: 32,
-    textAlign: "center",
-  },
-  userInfo: {
-    marginBottom: 32,
     padding: 20,
-    backgroundColor: "#F5F5F5",
-    borderRadius: 12,
+    justifyContent: "space-between",
   },
-  label: {
-    marginTop: 12,
+  topSection: {
+    flexShrink: 1,
+  },
+  name: {
+    color: Colors.text,
+    fontFamily: "Nunito-Sans",
+    fontWeight: 700,
+    fontSize: 20,
+  },
+  email: {
+    color: Colors.darkGray,
+    fontFamily: "Nunito-Sans",
+    fontWeight: 400,
     fontSize: 14,
-    color: "#666",
-  },
-  value: {
-    marginTop: 4,
-    fontSize: 16,
+    marginVertical: 12,
+    lineHeight: 15,
   },
 });

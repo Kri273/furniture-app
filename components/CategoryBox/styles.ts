@@ -3,30 +3,38 @@ import { Colors } from "../../constants/Colors";
 
 export const styles = StyleSheet.create({
   container: {
-    width: 90,
+    width: 44,
     alignItems: "center",
     paddingVertical: 10,
     borderRadius: 14,
-    backgroundColor: Colors.card,
-    borderWidth: 1,
-    borderColor: Colors.card,
     marginRight: 12,
   },
   selected: {
-    borderColor: Colors.primary,
+    backgroundColor: Colors.text,
+    color: Colors.white,
   },
-  image: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+  imageContainer: {
+    width: 44,
+    height: 44,    
+    borderRadius: 12,
     marginBottom: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.card,
+  },
+  
+  image: {
+    margin: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     color: Colors.mutedText,
-    fontWeight: "600",
+    fontFamily: "Nunito Sans",
+    fontWeight: "400"
   },
   selectedTitle: {
-    color: Colors.text,
+    color: Colors.primary,
   },
 });

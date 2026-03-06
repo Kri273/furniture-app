@@ -31,6 +31,14 @@ export default function RootLayout() {
     "DM-Sans-Bold": require("@/assets/images/fonts/DM_Sans/static/DMSans-Bold.ttf"),
     "DM-Sans-ExtraBold": require("@/assets/images/fonts/DM_Sans/static/DMSans-ExtraBold.ttf"),
     "DM-Sans-Black": require("@/assets/images/fonts/DM_Sans/static/DMSans-Black.ttf"),
+
+    // Gelasio 
+    "Gelasio-Medium": require("@/assets/images/fonts/Gelasio/static/Gelasio-Medium.ttf"),
+
+    // Nunito Sans
+    "Nunito-Sans": require("@/assets/images/fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf"),
+    "Nunito-Sans-Italic": require("@/assets/images/fonts/Nunito_Sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf")
+
   });
 
   useEffect(() => {

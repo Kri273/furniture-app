@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# Mobile Furniture App (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a mobile application built with **Expo React Native**.
+The project focuses on UI, navigation, and app structure.
+The application currently does **not use a backend** — most data is hardcoded for demonstration purposes.
 
-## Get started
+## Features
 
-1. Install dependencies
+### Splash Screen
 
-   ```bash
-   npm install
-   ```
+* App splash screen when opening the application.
 
-2. Start the app
+### Authentication (Login / Register)
 
-   ```bash
-   npx expo start
-   ```
+* Login and Register screens exist.
+* Username and password are required.
+* Authentication is **not connected to a backend**, so credentials are not validated.
+* Some user data is passed to the Profile screen after login.
 
-In the output, you'll find options to open the app in a
+### Navigation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* Navigation between all screens works.
+* Users can move between Home, Favorites, Profile.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Home Page
 
-## Get a fresh project
+* Displays product/listing information.
+* Data is currently **hardcoded**.
+* No backend integration.
 
-When you're ready, run:
+### Favorites
 
-```bash
-npm run reset-project
+* Users can add/remove favorites.
+* Favorites functionality works locally.
+* Data is hardcoded.
+
+### Detailed Screen
+
+* Shows more detailed information about a selected item.
+* Multiple images are displayed with a carousel indicator.
+
+### Profile
+
+* Displays user profile information.
+* Some data comes from the login input.
+* Remaining information is hardcoded.
+
+### Settings
+
+* Displays user profile information.
+* User data can be edited only locally.
+* Some data comes from the login input.
+* Remaining information is hardcoded.
+
+### New Listing Page
+
+* Page for adding a new listing exists.
+* Adding a listing is currently **hardcoded** (no database or backend).
+
+## Project Status
+
+* App UI completed
+* Navigation completed
+* No backend
+* No database
+* No API integration
+* Console has no errors
+
+## Technologies Used
+
+- Expo
+- React Native
+- React
+- Expo Router
+- React Navigation
+- TypeScript
+- AsyncStorage
+- React Native Reanimated
+- React Native Gesture Handler
+- React Native SVG
+- ESLint
+
+## Installation
+
+1. Install dependencies:
+
+```
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start Expo:
 
-## Learn more
+```
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Open the app using:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* Expo Go (mobile)
+* Android emulator
+* iOS simulator
 
-## Join the community
+## Author
 
-Join our community of developers creating universal apps.
+Kri273
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Notes
+
+This project was created for learning purposes and focuses mainly on frontend mobile development using Expo.
